@@ -1,13 +1,14 @@
 import streamlit as st
-import pickle
 import numpy as np
 from catboost import CatBoostClassifier
 
+# Konfigurasi judul dan icon page
 st.set_page_config(
     page_title="Heart Disease Prediction",
     page_icon="💓"
 )
 
+# Fungsi untuk load model catboost
 def load_model():
     model = CatBoostClassifier()
     model.load_model('catboost_model_heart_disease.cbm')
@@ -15,6 +16,7 @@ def load_model():
 
 model = load_model()
 
+# Menampilkan halaman prediksi
 def show_predict():
     st.title('💓 Heart Disease Prediction')
 

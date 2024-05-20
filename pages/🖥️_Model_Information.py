@@ -12,7 +12,7 @@ st.set_page_config(
 
 def show_model_information():
     st.title('🖥️ Model Information')
-    st.write('Awalnya, saya menggunakan 5 model untuk memprediksi penyakit jantung, yaitu:')
+    st.write('Saya mencoba 5 model untuk memprediksi penyakit jantung, yaitu:')
     st.write('1. Logistic Regression')
     st.write('2. Gradient Boosting Classifier')
     st.write('3. CatBoost Classifier')
@@ -22,8 +22,8 @@ def show_model_information():
     st.subheader('📈 Berikut adalah akurasi dari setiap model')
 
     nama_model = ['Logistic Regression', 'Gradient Boosting', 'CatBoost', 'Naive Bayes', 'XGBoost']
-    scoreTrainArr = [0.8542234332425068, 0.9019073569482289, 0.8896457765667575, 0.8365122615803815, 0.9373297002724795]
-    scoreTestArr = [0.8913043478260869, 0.8913043478260869, 0.9130434782608695, 0.8858695652173914, 0.8804347826086957]
+    accTrainArr = [0.8542234332425068, 0.946866485013624, 0.946866485013624, 0.8365122615803815, 0.9373297002724795]
+    accTestArr = [0.8913043478260869, 0.8967391304347826, 0.907608695652174, 0.8858695652173914, 0.8804347826086957]
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -34,10 +34,10 @@ def show_model_information():
     x_pos = np.arange(len(nama_model))
 
     # Plot untuk akurasi train
-    train_bars = ax.bar(x_pos, scoreTrainArr, width=bar_width, align='center', label='Train Accuracy')
+    train_bars = ax.bar(x_pos, accTrainArr, width=bar_width, align='center', label='Train Accuracy')
 
     # Plot untuk akurasi test
-    test_bars = ax.bar(x_pos + bar_width, scoreTestArr, width=bar_width, align='center', label='Test Accuracy')
+    test_bars = ax.bar(x_pos + bar_width, accTestArr, width=bar_width, align='center', label='Test Accuracy')
 
     ax.set_xticks(x_pos + bar_width / 2)
     ax.set_xticklabels(nama_model)
