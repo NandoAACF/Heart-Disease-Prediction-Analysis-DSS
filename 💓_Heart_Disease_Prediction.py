@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import numpy as np
+from catboost import CatBoostClassifier
 
 st.set_page_config(
     page_title="Heart Disease Prediction",
@@ -8,8 +9,8 @@ st.set_page_config(
 )
 
 def load_model():
-    with open('heart_disease_model.pickle', 'rb') as f:
-        model = pickle.load(f)
+    model = CatBoostClassifier()
+    model.load_model('catboost_model_heart_disease.cbm')
     return model
 
 model = load_model()
