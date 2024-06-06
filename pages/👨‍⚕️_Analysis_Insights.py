@@ -3,16 +3,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from sqlalchemy import create_engine
 
 st.set_page_config(
     page_title="Heart Disease Analysis Insights",
     page_icon="👨‍⚕️"
 )
 
+def sql_engine():
+    postgres_credential = st.secrets["postgres_credential"]
+    return create_engine(postgres_credential)
+
 @st.cache_data
 def load_data():
-    # Menampilkan data
-    df = pd.read_csv('data.csv')
+    db_engine = sql_engine()
+    df = pd.read_sql('SELECT * FROM spktable', db_engine)
     df['HeartDisease'] = df['HeartDisease'].replace({0:'No', 1:'Yes'})
     df = df.loc[df['Cholesterol'] > 50]
     df = df.loc[df['RestingBP'] > 50]
