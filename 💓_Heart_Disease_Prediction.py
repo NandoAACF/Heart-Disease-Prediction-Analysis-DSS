@@ -92,9 +92,15 @@ def show_predict():
         if ok:
             X = np.array([[age, sex, chestpain, restingbp, cholesterol, fastingbs, restingecg, maxhr, exerciseangina, oldpeak, st_slope]])
             pred = model.predict(X)
+            proba = model.predict_proba(X)[0]
+            confidence = max(proba) * 100
             if pred == 0:
-                st.subheader(f'You do not have a heart disease')
+                font_color = 'green'
+                st.markdown(f"<h3>You <span style='color: {font_color}'>do not have a heart disease</span></h3>", unsafe_allow_html=True)
             if pred == 1:
-                st.subheader(f'You have a heart disease')
+                font_color = 'red'
+                st.markdown(f"<h3>You <span style='color: {font_color}'>have a heart disease</span></h3>", unsafe_allow_html=True)
+                
+            st.markdown(f"<h4>Confidence: <span style='color: {font_color}'>{confidence:.2f}%</span></h4>", unsafe_allow_html=True)
 
 show_predict()
