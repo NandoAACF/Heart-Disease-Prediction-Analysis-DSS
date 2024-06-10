@@ -1,16 +1,17 @@
-# Heart Disease Prediction + Analysis
-**Web App: https://heart-disease-prediction-analysis.streamlit.app/**
+# **💓 Heart Disease Prediction + Analysis**
+**🖥️ Web App: https://heart-disease-prediction-analysis-dss.streamlit.app/**
 
-**Goal:** 
-- Visualize insight from each features
-- Find characteristic of people with heart disease
-- Predict whether a person has heart disease or not
-- Deploy the best model into Web App
+**🕵️ Goal:** 
+- Memprediksi apakah seseorang menderita penyakit jantung atau tidak
+- Memvisualisasikan insight dari setiap feature
+- Menganalisis karakteristik orang yang memiliki penyakit jantung
+- Menjelaskan analisis alasan dari hasil setiap visualisasi
+- Mendeploy model dan sistem menjadi sebuah web app
 
-**Model:**
+**📈 Model:**
 - Logistic Regression
 - Gradient Boosting Classifier
-- Catboost Classifier (used for the web app)
+- Catboost Classifier (Terbaik)
 - Naive Bayes
 - XGBoost Classifier
 
