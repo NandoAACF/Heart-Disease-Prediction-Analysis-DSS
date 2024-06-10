@@ -65,8 +65,13 @@ def show_model_information():
     st.write('Hal tersebut menunjukkan bahwa model Catboost tidak overfitting dan tidak underfitting, serta lebih baik dibandingkan model yang lain.')
 
     st.subheader('😺 Alasan memilih Catboost')
-    st.write('Catboost merupakan improvement dari Gradient Boosting yang bekerja dengan cara menggabungkan beberapa model prediksi yang lemah untuk membuat prediksi yang lebih kuat.')
-    st.write('Catboost membuat decision tree menggunakan algoritma Symmetric Binary Spitting yang mampu menghasilkan pohon yang seimbang dan simetris. Hal ini mampu mencegah terjadinya overfitting.')
-    st.write('Oleh karena itu, saya memilih model Catboost untuk memprediksi data yang diinputkan oleh user.')
+
+    st.write('Catboost merupakan improvement dari Gradient Boosting yang bekerja dengan cara menggabungkan beberapa decision tree untuk membuat prediksi yang lebih kuat. Setiap pohon akan dibuat sambil memperbaiki kesalahan prediksi pohon sebelumnya. Hal tersebut menyebabkan Catboost dapat menghasilkan akurasi yang cukup tinggi.')
+
+    st.write('Catboost membuat decision tree menggunakan algoritma symmetric binary splitting yang mampu menghasilkan pohon yang seimbang dan simetris sehingga pohon memiliki struktur yang sama pada setiap level. Hal ini mampu mempercepat waktu eksekusinya.')
+
+    st.write('Selain itu, Catboost juga menerapkan ordered boosting untuk menghindari kebocoran data selama pelatihan. Ordered boosting akan mengurutkan data berdasarkan nilai fitur dan membaginya menjadi beberapa bagian supaya informasi dari masa depan tidak digunakan. Hal tersebut mampu mengurangi overfitting.')
+
+    st.write('Berdasarkan berbagai alasan tersebut, saya memilih model Catboost untuk memprediksi data yang diinputkan oleh user.')
 
 show_model_information()
