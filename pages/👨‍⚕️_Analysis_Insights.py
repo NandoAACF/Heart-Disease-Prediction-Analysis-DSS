@@ -30,6 +30,9 @@ df = load_data()
 def show_insight():
     st.title('👨‍⚕️ Heart Disease Insights')
 
+    yes_color = '#f22c2c'
+    no_color = '#027302'
+
 
     st.markdown("### **1. Umur berapa yang rawan menderita penyakit jantung?**")
     # Lakukan binning untuk age
@@ -38,7 +41,7 @@ def show_insight():
     df['Age Group'] = pd.cut(df['Age'], bins=bins, labels=labels, right=False)
 
     plt.figure(figsize=(9, 5))
-    ax = sns.countplot(data=df, x='Age Group', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='Age Group', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     # Memberi anotasi
     for p in ax.patches:
@@ -49,15 +52,14 @@ def show_insight():
     plt.title('Heart Disease Berdasarkan Umur')
     st.pyplot(plt)
     st.write('Tampak bahwa umur 51 tahun ke atas cukup rawan terkena penyakit jantung. Semakin bertambahnya umur, manusia harus semakin menjaga pola hidupnya karena peluang terkena penyakit jantung semakin besar.')
-    st.write('Hal tersebut masuk akal karena semakin bertambahnya umur, maka semakin banyak pula faktor risiko yang dapat memicu penyakit jantung.')
-    st.write('Seiring bertambahnya usia, pembuluh darah cenderung mengalami penumpukan plak aterosklerotik (plak lemak), yang dapat menyebabkan penyempitan atau penyumbatan pembuluh darah koroner yang memasok darah ke jantung. Hal ini juga dapat meningkatkan risiko terjadinya penyakit jantung.')
+    st.write('Hal tersebut masuk akal karena semakin bertambahnya usia, maka pembuluh darah cenderung mengalami penumpukan plak aterosklerotik (plak lemak) yang dapat menyebabkan penyempitan atau penyumbatan pembuluh darah koroner yang memasok darah ke jantung. Hal ini juga dapat meningkatkan risiko terjadinya penyakit jantung.')
     
 
 
 
     st.markdown("### **2. Berapa batas maximum heart rate yang rawan penyakit jantung?**")
     plt.figure(figsize=(10, 5))
-    ax = sns.histplot(data=df, x='MaxHR', hue='HeartDisease')
+    ax = sns.histplot(data=df, x='MaxHR', hue='HeartDisease', palette={'Yes': 'red', 'No': no_color})
 
     plt.title('Heart Disease Berdasarkan Maximum Heart Rate')
     st.pyplot(plt)
@@ -70,7 +72,7 @@ def show_insight():
 
     st.markdown("### **3. Apa jenis kelamin yang rawan terhadap penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='Sex', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='Sex', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     for p in ax.patches:
         if p.get_height() > 0:
@@ -87,7 +89,7 @@ def show_insight():
 
     st.markdown("### **4. Jenis sakit dada apa yang rawan memicu penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='ChestPainType', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='ChestPainType', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     #  Memberi anotasi
     for p in ax.patches:
@@ -106,7 +108,7 @@ def show_insight():
     st.markdown("### **5. Apakah besar tekanan darah dapat mengindikasikan penyakit jantung?**")
     df['RestingBP'].replace(0, df['RestingBP'].median(),inplace=True)
     plt.figure(figsize=(10, 5))
-    ax = sns.histplot(data=df, x='RestingBP', hue='HeartDisease')
+    ax = sns.histplot(data=df, x='RestingBP', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     plt.title('Heart Disease Berdasarkan Tekanan Darah')
     st.pyplot(plt)
@@ -123,7 +125,7 @@ def show_insight():
     df['Cholesterol Group'] = pd.cut(df['Cholesterol'], bins=bins, labels=labels, right=False)
 
     plt.figure(figsize=(10, 5))
-    ax = sns.countplot(data=df, x='Cholesterol Group', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='Cholesterol Group', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     # Memberi anotasi
     for p in ax.patches:
@@ -141,7 +143,7 @@ def show_insight():
 
     st.markdown("### **7. Apakah kadar gula darah menunjukkan adanya penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='FastingBS', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='FastingBS', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     #  Memberi anotasi
     for p in ax.patches:
@@ -161,7 +163,7 @@ def show_insight():
 
     st.markdown("### **8. Bagaimana hasil resting electrocardiogram yang rawan terhadap penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='RestingECG', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='RestingECG', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     #  Memberi anotasi
     for p in ax.patches:
@@ -178,7 +180,7 @@ def show_insight():
 
     st.markdown("### **9. Bagaimana tingkat depresi segmen ST (oldpeak) terhadap penyakit jantung?**")
     plt.figure(figsize=(10, 5))
-    ax = sns.histplot(data=df, x='Oldpeak', hue='HeartDisease')
+    ax = sns.histplot(data=df, x='Oldpeak', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     plt.title('Heart Disease Berdasarkan Tingkat Depresi Segmen ST')
     st.pyplot(plt)
@@ -191,7 +193,7 @@ def show_insight():
 
     st.markdown("### **10. Apakah angina akibat olahraga dapat mengindikasikan seseorang menderita penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='ExerciseAngina', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='ExerciseAngina', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     #  Memberi anotasi
     for p in ax.patches:
@@ -212,7 +214,7 @@ def show_insight():
 
     st.markdown("### **11. Apakah tingkat kemiringan segmen ST dapat mengindikasikan penyakit jantung?**")
     plt.figure(figsize=(8, 5))
-    ax = sns.countplot(data=df, x='ST_Slope', hue='HeartDisease')
+    ax = sns.countplot(data=df, x='ST_Slope', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     #  Memberi anotasi
     for p in ax.patches:
