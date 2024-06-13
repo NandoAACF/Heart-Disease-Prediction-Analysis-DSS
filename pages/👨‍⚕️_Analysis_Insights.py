@@ -183,8 +183,8 @@ def show_insight():
 
     plt.title('Heart Disease Berdasarkan Hasil Resting Electrocardiogram ')
     st.pyplot(plt)
-    st.write('Hasil Resting Electrocardiogram LVH dan ST abnormal mengindikasikan adanya penyakit jantung.')
-    st.write('LVH (Left Ventricular Hypertrophy) adalah kondisi di mana otot ventriker kiri jantung menebal. Hal ini dapat terjadi sebagai respons terhadap peningkatan tekanan darah (hipertensi) atau karena penyakit jantung lainnya. Selain itu, abnormalitas pada segmen ST, seperti depresi dapat menunjukkan adanya iskemia miokard (kurangnya aliran darah ke jantung). Kondisi inilah yang menjadi tanda adanya penyakit jantung.')
+    st.write('Hasil Resting Electrocardiogram LVH (Left Ventricular Hypertrophy) dan ST abnormal mengindikasikan adanya penyakit jantung.')
+    st.write('LVH (Left Ventricular Hypertrophy) adalah kondisi di mana otot ventrikel kiri jantung menebal. Hal ini dapat terjadi sebagai respons terhadap peningkatan tekanan darah (hipertensi) atau karena penyakit jantung lainnya. Selain itu, abnormalitas pada segmen ST, seperti depresi dapat menunjukkan adanya iskemia miokard (kurangnya aliran darah ke jantung). Kondisi inilah yang menjadi tanda adanya penyakit jantung.')
 
 
 
@@ -237,6 +237,7 @@ def show_insight():
                         ha='center', va='center', xytext=(0, 5), textcoords='offset points')
 
     plt.title('Heart Disease Berdasarkan Kemiringan Segmen ST')
+    plt.xlabel('Kemiringan Segmen ST')
     st.pyplot(plt)
     st.write('Ya, kemiringan segmen ST dapat menjadi indikasi apakah seseorang menderita penyakit jantung atau tidak.')
     st.write('Jika hasil tes ST seseorang menunjukkan bahwa segmen ST-nya datar atau menurun, maka orang tersebut diindikasikan menderita penyakit jantung.')

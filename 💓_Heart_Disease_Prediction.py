@@ -27,10 +27,10 @@ def show_predict():
         age = st.select_slider('Berapa umur Anda?', options=[i for i in range(1, 126)], value=rand_age, help='Bertambahnya umur meningkatkan risiko penyakit jantung.')
 
         rand_sex = np.random.randint(0, 2)
-        sex = st.selectbox('Apa jenis kelamin Anda?', ("Male", "Female"), index=rand_sex, help='Laki-laki lebih rawan menderita penyakit jantung.')
-        if sex == 'Male':
+        sex = st.selectbox('Apa jenis kelamin Anda?', ("Laki-laki", "Perempuan"), index=rand_sex, help='Laki-laki lebih rawan menderita penyakit jantung.')
+        if sex == 'Laki-laki':
             sex = 1
-        elif sex == 'Female':
+        elif sex == 'Perempuan':
             sex = 2
 
         rand_chestpain = np.random.randint(0, 4)
@@ -51,29 +51,29 @@ def show_predict():
         cholesterol = st.select_slider('Berapa total kolestrol Anda dalam satuan mg/dl?', options=[i for i in range(145, 361)], value=rand_cholesterol, help='Kolesterol tinggi menyebabkan penumpukan lemak di dinding arteri')
 
         rand_fastingbs = np.random.randint(0, 2)
-        fastingbs = st.selectbox('Berapa kadar gula darah Anda?', ("Lower than 120mg/ml", "Greater than 120mg/ml"), index=rand_fastingbs, help='Kadar gula darah yang tinggi menyebabkan rusaknya pembuluh darah dan jantung.')
-        if fastingbs == 'Lower than 120mg/ml':
+        fastingbs = st.selectbox('Berapa kadar gula darah Anda?', ("Di bawah 120mg/dL", "Di atas 120mg/dL"), index=rand_fastingbs, help='Kadar gula darah yang tinggi menyebabkan rusaknya pembuluh darah dan jantung.')
+        if fastingbs == 'Di bawah 120mg/dL':
             fastingbs = 0
-        elif fastingbs == 'Greater than 120mg/ml':
+        elif fastingbs == 'Di atas 120mg/dL':
             fastingbs = 1
 
         rand_restingecg = np.random.randint(0, 3)
-        restingecg = st.selectbox('Apa hasil tes resting electrocardiogram Anda?', ("Normal", "Showing probable or definite left ventricular hypertrophy", "Having ST-T wave abnormality"), index=rand_restingecg, help='Lakukan tes electrocardiogram di laboratorium untuk mendapatkan hasilnya')
+        restingecg = st.selectbox('Apa hasil tes resting electrocardiogram Anda?', ("Normal", "Penebalan Dinding Ventrikel Kiri", "Segmen ST Abnormal"), index=rand_restingecg, help='Lakukan tes electrocardiogram di laboratorium untuk mendapatkan hasilnya')
         if restingecg == 'Normal':
             restingecg = 0
-        elif restingecg == 'Showing probable or definite left ventricular hypertrophy':
+        elif restingecg == 'Penebalan Dinding Ventrikel Kiri':
             restingecg = 1
-        elif restingecg == 'Having ST-T wave abnormality':
+        elif restingecg == 'Segmen ST Abnormal':
             restingecg = 2
 
         rand_maxhr = np.random.randint(60, 201)
         maxhr = st.select_slider('Berapa denyut jantung maksimal Anda dalam satu menit', options=[i for i in range(60, 201)], value=rand_maxhr, help='Jantung yang bermasalah memiliki denyut jantung yang cenderung lambat.')
 
         rand_exerciseangina = np.random.randint(0, 2)
-        exerciseangina = st.selectbox('Apakah Anda merasakan nyeri dada saat berolahraga?', ("Yes", "No"), index=rand_exerciseangina, help='Nyeri dada setelah berolahraga menunjukkan bahwa pasokan darah ke otot jantung tidak cukup atau terganggu.')
-        if exerciseangina == 'Yes':
+        exerciseangina = st.selectbox('Apakah Anda merasakan nyeri dada saat berolahraga?', ("Iya", "Tidak"), index=rand_exerciseangina, help='Nyeri dada setelah berolahraga menunjukkan bahwa pasokan darah ke otot jantung tidak cukup atau terganggu.')
+        if exerciseangina == 'Iya':
             exerciseangina = 1
-        elif exerciseangina == 'No':
+        elif exerciseangina == 'Tidak':
             exerciseangina = 0
 
         rand_oldpeak = np.random.randint(0, 7)
