@@ -24,7 +24,7 @@ def show_predict():
         st.info('📢 Untuk keperluan demo, nilai data input akan digenerate secara random jika tidak diisi. Tujuannya supaya memudahkan jika ingin mencoba-coba sistem prediksi ini.')
 
         rand_age = np.random.randint(27, 77)
-        age = st.select_slider('Berapa umur Anda?', options=[i for i in range(1, 111)], value=rand_age, help='Bertambahnya umur meningkatkan risiko penyakit jantung.')
+        age = st.select_slider('Berapa umur Anda?', options=[i for i in range(1, 126)], value=rand_age, help='Bertambahnya umur meningkatkan risiko penyakit jantung.')
 
         rand_sex = np.random.randint(0, 2)
         sex = st.selectbox('Apa jenis kelamin Anda?', ("Male", "Female"), index=rand_sex, help='Laki-laki lebih rawan menderita penyakit jantung.')
@@ -44,11 +44,11 @@ def show_predict():
         elif chestpain == 'Typical Angina':
             chestpain = 4
         
-        rand_restingbp = np.random.randint(60, 201)
-        restingbp = st.select_slider('Berapa tekanan darah Anda dalam satuan mmHg?', options=[i for i in range(60, 201)], value=rand_restingbp, help='Tekanan darah yang tinggi menyebabkan jantung bekerja keras memompa darah ke seluruh tubuh.')
+        rand_restingbp = np.random.randint(90, 180)
+        restingbp = st.select_slider('Berapa tekanan darah Anda dalam satuan mmHg?', options=[i for i in range(90, 181)], value=rand_restingbp, help='Tekanan darah yang tinggi menyebabkan jantung bekerja keras memompa darah ke seluruh tubuh.')
 
-        rand_cholesterol = np.random.randint(120, 481)
-        cholesterol = st.select_slider('Berapa kolestrol Anda dalam satuan mg/dl?', options=[i for i in range(120, 481)], value=rand_cholesterol, help='Kolesterol tinggi menyebabkan penumpukan lemak di dinding arteri')
+        rand_cholesterol = np.random.randint(145, 360)
+        cholesterol = st.select_slider('Berapa total kolestrol Anda dalam satuan mg/dl?', options=[i for i in range(145, 361)], value=rand_cholesterol, help='Kolesterol tinggi menyebabkan penumpukan lemak di dinding arteri')
 
         rand_fastingbs = np.random.randint(0, 2)
         fastingbs = st.selectbox('Berapa kadar gula darah Anda?', ("Lower than 120mg/ml", "Greater than 120mg/ml"), index=rand_fastingbs, help='Kadar gula darah yang tinggi menyebabkan rusaknya pembuluh darah dan jantung.')

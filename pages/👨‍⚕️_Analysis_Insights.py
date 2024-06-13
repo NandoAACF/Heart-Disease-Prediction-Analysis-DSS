@@ -19,8 +19,8 @@ def load_data():
     db_engine = sql_engine()
     df = pd.read_sql('SELECT * FROM spktable', db_engine)
     df['HeartDisease'] = df['HeartDisease'].replace({0:'No', 1:'Yes'})
-    df = df.loc[df['Cholesterol'] > 50]
-    df = df.loc[df['RestingBP'] > 50]
+    df = df.loc[(df['Cholesterol'] > 50) & (df['Cholesterol'] < 350)]
+    df = df.loc[(df['RestingBP'] > 90) & (df['RestingBP'] < 180)]
     df = df.loc[df['Oldpeak'] >= 0]
 
     return df
@@ -78,6 +78,8 @@ def show_insight():
         if p.get_height() > 0:
             ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
                         ha='center', va='center', xytext=(0, 5), textcoords='offset points')
+            
+    ax.set_xticklabels(['Male', 'Female'])
 
     plt.title('Heart Disease Berdasarkan Jenis Kelamin')
     st.pyplot(plt)
@@ -99,6 +101,7 @@ def show_insight():
 
     plt.title('Heart Disease Berdasarkan Tipe Chest Pain')
     st.pyplot(plt)
+    st.write('Keterangan: ATA = Atypical Angina, NAP = Non-anginal Pain, AS = Asymptomatic, TA = Typical Angina')
     st.write('Chestpain asymptomatic adalah jenis sakit dada yang paling mengindikasikan adanya penyakit jantung. Tampak perbedaan yang sangat signifikan dengan jenis sakit dada yang lain.')
     st.write('Hal tersebut karena chestpain asymptomatic terjadi tanpa gejala sehinnga seringkali diabaikan oleh penderitanya. Ketika diabaikan, maka dapat semakin parah dan berujung pada penyakit jantung.')
 
@@ -111,8 +114,9 @@ def show_insight():
     ax = sns.histplot(data=df, x='RestingBP', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     plt.title('Heart Disease Berdasarkan Tekanan Darah')
+    plt.xlabel('Tekanan Darah (mmHg)')
     st.pyplot(plt)
-    st.write('Ya, tekanan darah di atas 130 mm Hg dapat menjadi indikasi bahwa seseorang menderita penyakit jantung.')
+    st.write('Ya, tekanan darah di atas 130 mmHg dapat menjadi indikasi bahwa seseorang menderita penyakit jantung.')
     st.write('Alasannya karena tekanan darah yang tinggi akan menyebabkan jantung harus bekerja keras dalam memompa darah ke seluruh tubuh. Selain itu, tekanan darah yang tinggi juga merusak pembuluh darah koroner yang memasok darah ke jantung sehingga meningkatkan resiko penumpukan plak lemak dan dampaknya juga mengakibatkan penyakit jantung.')
 
 
@@ -120,8 +124,8 @@ def show_insight():
 
     st.markdown("### **6. Berapa tingkat kolesterol yang rawan memicu penyakit jantung?**")
     # Lakukan binning untuk kolesterol
-    bins = [100, 150, 200, 250, 300, 350, 400, 450, 600]
-    labels = ['101-150', '151-200', '201-250', '251-300', '301-350', '351-400', '401-450', '451-600']
+    bins = [100, 150, 200, 250, 300, 350]
+    labels = ['101-150', '151-200', '201-250', '251-300', '301-350']
     df['Cholesterol Group'] = pd.cut(df['Cholesterol'], bins=bins, labels=labels, right=False)
 
     plt.figure(figsize=(10, 5))
@@ -133,9 +137,11 @@ def show_insight():
             ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
                         ha='center', va='center', xytext=(0, 5), textcoords='offset points')
 
+    plt.xlabel('Retang Total Kolesterol (mg/dL)')
+
     plt.title('Heart Disease Berdasarkan Tingkat Kolesterol')
     st.pyplot(plt)
-    st.write('Tampak bahwa orang dengan tingkat kolesterol di atas 251 mm/dL rawan menderita penyakit jantung.')
+    st.write('Tampak bahwa orang dengan tingkat kolesterol di atas 251 mg/dL rawan menderita penyakit jantung.')
     st.write('Alasan: Kolestrol yang tinggi akan menyebabkan penumpukan plak lemak di dinding arteri. Akibatnya plak tersebut akan menyempitkan arteri dan mengurangi aliran darah yang kaya oksigen ke jantung. Hal inilah yang menyebabkan terjadinya penyakit jantung, terutama penyakit jantung koroner.')
 
 
@@ -150,12 +156,16 @@ def show_insight():
         if p.get_height() > 0:
             ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
                         ha='center', va='center', xytext=(0, 5), textcoords='offset points')
+            
+    ax.set_xticklabels(['Kurang dari 120 mg/dL', 'Lebih dari 120 mg/dL'])
 
-    plt.title('Heart Disease Berdasarkan Fasting Blood Sugar')
+    plt.xlabel('Kadar Gula Darah')
+
+    plt.title('Heart Disease Berdasarkan Kadar Gula Darah')
     st.pyplot(plt)
-    st.write('Keterangan:')
-    st.write('0 = Kadar gula darah < 120 mg/dL')
-    st.write('1 = Kadar gula darah > 120 mg/dL')
+    # st.write('Keterangan:')
+    # st.write('0 = Kadar gula darah < 120 mg/dL')
+    # st.write('1 = Kadar gula darah > 120 mg/dL')
     st.write('Ya. Tampak bahwa sebagian besar orang yang memiliki kadar gula darah di atas 120 mg/dL memiliki penyakit jantung.')
     st.write('Hal tersebut masuk akal karena tingginya kadar gula darah dapat merusak pembuluh darah dan menyebabkan komplikasi penyakit jantung serius. Selain itu, gula darah yang tinggi dapat menyebabkan gangguan pada sistem kardiovaskular, seperti disfungsi otot jantung, aritmia (ketidakaturan detak jantung), dan kerusakan katup jantung.')
 
@@ -183,6 +193,7 @@ def show_insight():
     ax = sns.histplot(data=df, x='Oldpeak', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
     plt.title('Heart Disease Berdasarkan Tingkat Depresi Segmen ST')
+    plt.xlabel('Tingkat Depresi Segmen ST')
     st.pyplot(plt)
     st.write('Tampak bahwa orang yang memiliki hasil tes depresi segmen ST di atas 1 rawan menderita penyakit jantung.')
     st.write('Dengan kata lain, semakin besar tingkat depresi segmen ST, maka semakin besar pula kemungkinan menderita penyakit jantung.')
@@ -191,7 +202,7 @@ def show_insight():
 
 
 
-    st.markdown("### **10. Apakah angina akibat olahraga dapat mengindikasikan seseorang menderita penyakit jantung?**")
+    st.markdown("### **10. Apakah nyeri data (angina) akibat olahraga dapat mengindikasikan seseorang menderita penyakit jantung?**")
     plt.figure(figsize=(8, 5))
     ax = sns.countplot(data=df, x='ExerciseAngina', hue='HeartDisease', palette={'Yes': yes_color, 'No': no_color})
 
@@ -202,6 +213,9 @@ def show_insight():
                         ha='center', va='center', xytext=(0, 5), textcoords='offset points')
 
     plt.title('Heart Disease Berdasarkan Angina Akibat Olahraga')
+    ax.set_xticklabels(['Tidak', 'Iya'])
+    plt.xlabel('Angina')
+
     st.pyplot(plt)
     st.write('Ya, munculnya angina setelah berolahraga dapat menjadi indikator bahwa seseorang menderita penyakit jantung.')
     st.write('Tampak perbedaan yang sangat signifikan pada grafik di atas bahwa sebagian besar orang yang mengalami angina setelah olahraga ternyata menderita penyakit jantung.')
