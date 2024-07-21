@@ -16,8 +16,9 @@ def sql_engine():
 
 @st.cache_data
 def load_data():
-    db_engine = sql_engine()
-    df = pd.read_sql('SELECT * FROM spktable', db_engine)
+    # db_engine = sql_engine()
+    # df = pd.read_sql('SELECT * FROM spktable', db_engine)
+    df = pd.read_csv('data.csv')
     df['HeartDisease'] = df['HeartDisease'].replace({0:'No', 1:'Yes'})
     df = df.loc[(df['Cholesterol'] > 50) & (df['Cholesterol'] < 350)]
     df = df.loc[(df['RestingBP'] > 90) & (df['RestingBP'] < 180)]
