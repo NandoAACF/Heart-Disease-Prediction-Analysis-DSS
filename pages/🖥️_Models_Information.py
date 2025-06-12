@@ -6,12 +6,12 @@ import plotly.express as px
 import numpy as np
 
 st.set_page_config(
-    page_title="Model Information",
+    page_title="Models Information",
     page_icon="🖥️"
 )
 
 def show_model_information():
-    st.title('🖥️ Model Information')
+    st.title('🖥️ Models Information')
     st.write('Saya mencoba 5 model untuk memprediksi penyakit jantung, yaitu:')
     st.write('1. Logistic Regression')
     st.write('2. Gradient Boosting Classifier')
@@ -70,7 +70,7 @@ def show_model_information():
 
     st.write('Catboost membuat decision tree menggunakan algoritma symmetric binary splitting yang mampu menghasilkan pohon yang seimbang dan simetris sehingga pohon memiliki struktur yang sama pada setiap level. Hal ini mampu mempercepat waktu eksekusinya.')
 
-    st.write('Selain itu, Catboost juga menerapkan ordered boosting untuk menghindari kebocoran data selama pelatihan. Ordered boosting akan mengurutkan data berdasarkan nilai fitur dan membaginya menjadi beberapa bagian supaya informasi dari masa depan tidak digunakan. Hal tersebut mampu mengurangi overfitting.')
+    st.write('Selain itu, Catboost juga menerapkan ordered boosting untuk menghindari kebocoran data selama pelatihan. Dengan ordered boosting, Catboost dapat menghindari informasi masa depan saat membuat decision tree sehingga hanya data sebelumnya yang digunakan untuk menghitung residual bagi sebuah instance. Hal tersebut mampu mengurangi overfitting.')
 
     st.write('Berdasarkan berbagai alasan tersebut, saya memilih model Catboost untuk memprediksi data yang diinputkan oleh user.')
 
